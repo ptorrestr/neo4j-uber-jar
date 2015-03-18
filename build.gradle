@@ -1,0 +1,30 @@
+plugins {
+  id 'java' // or 'groovy' Must be explicitly applied
+  id 'maven'
+  id 'com.github.johnrengelman.shadow' version '1.2.0'
+}
+
+group = 'neel.kanopy'
+description = """ NEEL Challange """
+version = '2.1.6'
+
+/**** DEPENDENCY *****/
+dependencies {
+  compile "org.neo4j:neo4j:2.1.6"
+}
+
+repositories {
+  mavenCentral()
+  jcenter()
+}
+
+shadowJar {
+  classifier = ''
+  relocate 'org.apache.lucene', 'shaded_lucene_3_6.org.apache.lucene'
+}
+
+//install.dependsOn ':shadowJar'
+
+artifacts {
+  archives shadowJar
+}
